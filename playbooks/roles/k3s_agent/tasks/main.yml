@@ -1,0 +1,16 @@
+---
+- name: Install k3s agent
+  ansible.builtin.shell: |
+    curl -sfL https://get.k3s.io | sh -s - agent {{ extra_agent_args }}
+  environment:
+    K3S_URL: "https://{{ api_endpoint }}:6443"
+    K3S_TOKEN: "{{ token }}"
+  args:
+    creates: /usr/local/bin/k3s-agent
+
+- name: Enable and start k3s agent
+  ansible.builtin.systemd:
+    name: k3s-agent
+    enabled: true
+    state: started
+

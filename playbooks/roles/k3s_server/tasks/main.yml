@@ -1,0 +1,25 @@
+---
+
+- name: Install k3s server
+  ansible.builtin.shell: |
+    curl -sfL https://get.k3s.io | sh -s - server \
+      {{ extra_server_args }} \
+      --advertise-address={{ api_endpoint }} \
+      --tls-san={{ api_endpoint }}
+  environment:
+    K3S_TOKEN: "{{ token }}"
+  args:
+    creates: /usr/local/bin/k3s
+    
+- name: Enable and start k3s server
+  ansible.builtin.systemd:
+    name: k3s
+    enabled: true
+    state: started
+
+- name: Change file ownership, group and permissions
+  ansible.builtin.file:
+    path: /etc/rancher/k3s/k3s.yaml
+    owner: vagrant
+    group: vagrant
+    mode: '0644'
