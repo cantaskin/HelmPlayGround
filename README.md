@@ -123,6 +123,7 @@ Sistem kaynaklarım yeterli olmadığı için uygulama aşağıdaki değerlerle 
 
 - **1 CPU**
 - **512Mi Memory**
+- **2 Replica**
 
 ### Örnek `values.yaml`
 
