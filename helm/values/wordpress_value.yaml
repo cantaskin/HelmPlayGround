@@ -1,0 +1,17 @@
+mariadb:
+  enabled: true
+  auth:
+    database: bitnami_wordpress
+    username: bn_wordpress
+    existingSecret: "wordpress-db-secret"
+
+ingress:
+  enabled: true
+  hostname: wordpress.local
+  tls: true
+  extraTls:
+    - hosts:
+        - wordpress.local
+      secretName: wordpress-tls-secret
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"

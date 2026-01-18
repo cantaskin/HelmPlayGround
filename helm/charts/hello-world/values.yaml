@@ -1,0 +1,49 @@
+autoscaling:
+  enabled: false
+
+replicaCount: 1
+
+image:
+  repository: node
+  tag: "alpine3.23"
+  pullPolicy: Never
+
+command:
+  - sh
+  - -c
+args:
+  - |
+    node -e "require('http').createServer((_,res)=>res.end('hello world')).listen(80)"
+
+
+
+imagePullSecrets: []
+
+serviceAccount:
+  create: false
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+livenessProbe: {}
+readinessProbe: {}
+
+resources: {}
+
+volumes: []
+volumeMounts: []
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+httpRoute : {}
+ingress:
+  enabled: false

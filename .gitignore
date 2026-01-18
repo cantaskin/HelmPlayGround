@@ -1,1 +1,3 @@
 .vagrant
+tls.crt
+tls.key
